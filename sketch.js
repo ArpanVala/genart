@@ -5,25 +5,42 @@ const settings = {
     //units: 'cm',
   
     //orientation: 'landscape',
-    
+
   // for printing
   // dimensions: 'A4',
   // pixelsPerInch: 300, 
 };
 
 const sketch = () => {
-  return ({ context, width, height }) => {
-    context.fillStyle = 'orange';
-    context.fillRect(0, 0, width, height);
+  const createGrid = () => {
+    const points = [];
+    const count=5;
+    for(let i=0;i<count;i++){
+      for(let j=0;j<count;j++){
+        const u= count <= 1 ? 0.5: i/(count-1);
+        const v= count <= 1 ? 0.5: j/(count-1);
+        points.push([u,v]);
+      }
+    }
+    return points;
+  }
 
-    context.beginPath();
-    context.arc(width/2,height/2.5,width*0.2,0,Math.PI,false);
-    context.fillStyle = 'red';
-    context.fill();
-    context.lineWidth = width*0.02;
-    context.strokeStyle = 'darkgreen';
-    context.stroke();
-    
+  const points = createGrid();
+
+  return ({ context, width, height }) => {
+   context.fillStyle='black';
+   context.fillRect(0,0,width,height);
+   
+   points.forEach(([u,v])=>{
+     const x= u * width;
+     const y= v * height;
+     context.beginPath();
+     context.arc(x,y,360,0,Math.PI*2,false);
+     context.strokeStyle='white';
+     context.lineWidth=5;
+     context.stroke();
+   });
+   
   };
 };
 
