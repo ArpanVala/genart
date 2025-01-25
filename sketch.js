@@ -22,16 +22,17 @@ const sketch = () => {
       for(let j=0;j<count;j++){
         const u= count <= 1 ? 0.5: i/(count-1);
         const v= count <= 1 ? 0.5: j/(count-1);
+        const radius = Math.abs(random.noise2D(u,v))*0.03;
         points.push({
           colors: random.pick(palette),
           positions:[u,v],
-          radius:Math.max(0,random.gaussian()*0.02)
+          radius
         });
       }
     }
     return points;
   }
-  random.setSeed(5);
+  // random.setSeed(5);
   const points = createGrid().filter(()=>{return random.value() > 0.5});
   const margin = 300;
 
