@@ -50,7 +50,7 @@ const sketch = ({ context }) => {
   // Setup a mesh with geometry + material
   for (let i = 0; i < 40; i++) {
 
-    const mesh = new THREE.Mesh(geometry,  new THREE.MeshBasicMaterial({
+    const mesh = new THREE.Mesh(geometry,  new THREE.MeshStandardMaterial({
     color: random.pick(palette),
     // wireframe: true
   }));
@@ -68,6 +68,11 @@ const sketch = ({ context }) => {
 
   }
 
+  scene.add(new THREE.AmbientLight('hsl(0, 0%, 40%)'));
+
+  const light = new THREE.DirectionalLight('white', 1);
+  light.position.set(0, 4, 0);
+  scene.add(light);
   // draw each frame
   return {
     // Handle resize events here
