@@ -1,0 +1,6 @@
+#1 specify fps,duration properties of setting
+#2 run `canvas-sketch webgl.js --output=tmp/`
+#3 click on canvas and press ctrl+shft+s
+it will store sequence of pngs in tmp file
+#4 install package `npm install @ffmpeg-installer/ffmpeg --save`
+#5 run `canvas-skecth-mp4 tmp/`

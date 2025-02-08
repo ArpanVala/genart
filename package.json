@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "canvas-sketch": "^0.7.7",
     "canvas-sketch-util": "^1.10.0",
     "nice-color-palettes": "^4.0.0",

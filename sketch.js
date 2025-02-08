@@ -3,7 +3,7 @@ const {lerp}= require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random');
 const colors = require('nice-color-palettes');
 const settings = {
-  dimensions: [2048, 2048 ],
+  // dimensions: [2048, 2048 ],
   // dimensions:[1080,1920]
   // dimensions: [1080,2408],
     //units: 'cm',
