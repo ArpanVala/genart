@@ -1,7 +1,8 @@
 const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 const palettes = require("nice-color-palettes");
-// const { roughness } = require("three/tsl");
+const eases = require("eases");
+const BezierEasing = require("bezier-easing");
 import * as THREE from 'three';
 
 
@@ -14,8 +15,8 @@ require("three/examples/js/controls/OrbitControls");
 const settings = {
   // Make the loop animated
   animate: true,
-  // dimensions: [512, 512],
-  dimensions: [1080,2408],
+  dimensions: [512, 512],
+  // dimensions: [1080,2408],
   // dimensions:[1080,1920],
   fps: 24,
   duration: 4,
@@ -53,7 +54,7 @@ const sketch = ({ context }) => {
 
   const palette = random.pick(palettes);
   // Setup a mesh with geometry + material
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 40; i++) {
 
     const mesh = new THREE.Mesh(geometry,  new THREE.MeshStandardMaterial({
     color: random.pick(palette),
@@ -68,7 +69,7 @@ const sketch = ({ context }) => {
       random.range(-1, 1),
       random.range(-1, 1)
     )
-    mesh.scale.multiplyScalar(0.4);
+    mesh.scale.multiplyScalar(0.6);
     scene.add(mesh);
 
   }
@@ -78,6 +79,9 @@ const sketch = ({ context }) => {
   const light = new THREE.DirectionalLight('white', 1);
   light.position.set(0, 100, 0);
   scene.add(light);
+
+  const easefn= BezierEasing(.67,0,.29,1.01);
+
   // draw each frame
   return {
     // Handle resize events here
@@ -111,7 +115,8 @@ const sketch = ({ context }) => {
     },
     // Update & render your scene here
     render({playhead }) {
-      scene.rotation.y = playhead *Math.PI * 2;
+      let t = Math.sin(playhead *Math.PI * 2);
+      scene.rotation.y =easefn(t);
 
       renderer.render(scene, camera);
     },
