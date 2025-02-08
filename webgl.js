@@ -1,4 +1,7 @@
 const canvasSketch = require("canvas-sketch");
+// const { roughness } = require("three/tsl");
+import * as THREE from 'three';
+
 
 // Ensure ThreeJS is in global scope for the 'examples/'
 global.THREE = require("three");
@@ -17,7 +20,8 @@ const settings = {
 const sketch = ({ context }) => {
   // Create a renderer
   const renderer = new THREE.WebGLRenderer({
-    canvas: context.canvas
+    // canvas: context.canvas
+    context
   });
 
   // WebGL background color
@@ -35,12 +39,13 @@ const sketch = ({ context }) => {
   const scene = new THREE.Scene();
 
   // Setup a geometry
-  const geometry = new THREE.SphereGeometry(1,32, 16);
+  // const geometry = new THREE.SphereGeometry(1,32, 16);
+  const geometry = new THREE.BoxGeometry(1,1, 1);
 
   // Setup a material
   const material = new THREE.MeshBasicMaterial({
-    color: "black",
-    wireframe: true
+    color: "red",
+    // wireframe: true
   });
 
   // Setup a mesh with geometry + material
@@ -58,7 +63,7 @@ const sketch = ({ context }) => {
     },
     // Update & render your scene here
     render({ time }) {
-      mesh.rotation.y = time * (0.28);
+      mesh.rotation.y = time * (0.4);
       controls.update();
       renderer.render(scene, camera);
     },
