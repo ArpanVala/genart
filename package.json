@@ -16,6 +16,7 @@
     "canvas-sketch-util": "^1.10.0",
     "colorbrewer": "^1.6.1",
     "eases": "^1.0.8",
+    "glsl-hsl2rgb": "^1.1.0",
     "glsl-noise": "^0.0.0",
     "nice-color-palettes": "^4.0.0",
     "three": "^0.147.0"
