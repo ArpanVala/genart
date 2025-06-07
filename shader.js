@@ -16,17 +16,23 @@ const frag = glsl(`
   uniform float aspect;
   varying vec2 vUv;
 
+  #pragma glslify:noise = require('glsl-noise/simplex/3d');
+
   void main () {
-  vec3 colorA = sin(time* 2.0) +vec3(1.0, 0.0, 0.0);
-  vec3 colorB = vec3(0.0, 1.0, 0.0);
+  // vec3 colorA = sin(time* 2.0) +vec3(1.0, 0.0, 0.0);
+  // vec3 colorB = vec3(0.0, 1.0, 0.0);
+  
   vec2 center = vUv - 0.5;
   center.x *= aspect;
-  float dist = length(center);
   
-  float alpha = smoothstep(0.251, 0.25, dist);
+  // float dist = length(center);
+  
+  // float alpha = smoothstep(0.251, 0.25, dist);
 
-  vec3 color = mix(colorA, colorB, vUv.y + vUv.x + sin(time));
-    gl_FragColor = vec4(color, alpha);
+  // vec3 color = mix(colorA, colorB, vUv.y + vUv.x + sin(time));
+
+  float n = noise(vec3(center * 4.0, time));
+  gl_FragColor = vec4(vec3(n), 1.0);
   }
 `);
 
@@ -35,7 +41,6 @@ const sketch = ({ gl }) => {
   
   // Create the shader and return it
   return createShader({
-    clearColor:'lightgray',
     // Pass along WebGL context
     gl,
     // Specify fragment and/or vertex shader strings
